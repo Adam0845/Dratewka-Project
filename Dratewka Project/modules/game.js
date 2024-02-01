@@ -1,0 +1,2 @@
+let currentlocation = '';
+let whereicango = '';
