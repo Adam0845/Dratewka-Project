@@ -1,9 +1,20 @@
-function Location(text, color, directions) {
+class Location 
+{ 
+  constructor(text, color, directions) {
     this.text = text;
     this.color = color;
     this.directions = directions 
 }
-
+    getDirections() {
+        return this.directions;
+    }
+    getColor() {
+        return this.color;
+    }
+    getText() {
+        return this.text;
+    }
+}
 const allLocations = [
     [],
     [
@@ -57,5 +68,7 @@ const allLocations = [
 ];
 allLocations[5] = Array(4).fill(undefined).concat(allLocations[5]);
 allLocations[6] = Array(4).fill(undefined).concat(allLocations[6]);
-// console.log(allLocations[5][4])
-// console.log(allLocations)
+for (let i = 1; i < 5; i++) {
+      allLocations[i].unshift(undefined); 
+ }
+console.log(allLocations)

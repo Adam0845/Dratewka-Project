@@ -1,9 +1,11 @@
 @font-face {
     font-family: dratewkafont;
     src: url(../data/font/PressStart2P.ttf);
+    
 }
 #game
 {
+    font-size: 25px;
     width: 40%;
     margin: 0 auto;
     text-align: center;
@@ -19,10 +21,23 @@
     color: white;
     font-family: dratewkafont;
     border: 0px;
+    width: 150px;
+   
 }
 body
 {
     box-sizing: border-box;
     height: 10vh;
     background-color: #484848;
+}
+#locationimg
+{
+    margin: 10px;
+    margin-right: 50%;
+    border: 4px solid white;
+
+}
+#whatnow
+{
+    margin: 10px;
 }
