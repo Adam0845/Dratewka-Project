@@ -28,6 +28,8 @@ function handleInput(event) {
             
     }
 }
+const badway = "You can't go that way...";
+const wrongcmd = "Try another command or use V...";
 window.addEventListener('keydown', handleInput);
 document.getElementById('locationimg').style.background = allLocations[locx][locy].getColor()
 document.getElementById('text').innerHTML = allLocations[locx][locy].getText();
@@ -38,44 +40,59 @@ function nextLocation(direction) {
         console.log(options)
         if (options.includes("NORTH")) {
             locx--;
-            updateUI(locx, locy)
+            goinsomewhere("north")
+            setTimeout(() => {
+                updateUI(locx, locy)
+                }, 1000);
+        }
+        else {
+            wrongCommand(wrongcmd)
         }
     }
-    if (direction === "SOUTH" || direction === "S") {
+    else if (direction === "SOUTH" || direction === "S") {
         let options = allLocations[locx][locy].getDirections();
         console.log(options)
         if (options.includes("SOUTH")) {
             locx++;
+            goinsomewhere("south")
+            setTimeout(() => {
             updateUI(locx, locy)
+            }, 1000);
         }
         else
         {
-            document.getElementById('nothatway').innerHTML = "You can't go that way";
+            wrongCommand(badway);
         }
     }
-    if (direction === "WEST" || direction === "W") {
+    else if (direction === "WEST" || direction === "W") {
         let options = allLocations[locx][locy].getDirections();
         console.log(options)
         if (options.includes("WEST")) {
             locy--;
-            updateUI(locx, locy)
+            goinsomewhere("west")
+            setTimeout(() => {
+                updateUI(locx, locy)
+                }, 1000);
         }
-        else
-        {
-            document.getElementById('nothatway').innerHTML = "You can't go that way";
+        else {
+            wrongCommand(badway)
         }
     }
-    if (direction === "EAST" || direction === "E") {
+    else if (direction === "EAST" || direction === "E") {
         let options = allLocations[locx][locy].getDirections();
         console.log(options)
         if (options.includes("EAST")) {
             locy++;
-            updateUI(locx, locy)
+            goinsomewhere("east")
+            setTimeout(() => {
+                updateUI(locx, locy)
+                }, 1000);
         }
-        else
-        {
-            document.getElementById('nothatway').innerHTML = "You can't go that way";
+        else {
+            wrongCommand(badway)
         }
     }
-    
+    else {
+        wrongCommand(wrongcmd);
+    }
 }
