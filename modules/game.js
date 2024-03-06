@@ -3,7 +3,11 @@ let locy = 7;
 console.log(allLocations[locx][locy].getColor())
 console.log(allLocations[locx][locy].getText())
 const inputElement = document.getElementById('ginput');
-
+const vocalbulary = ["NORTH or N, SOUTH or S","WEST or W, EAST or E", "TAKE (object) or T (object)", "DROP (object) or D (object)", "USE (object) or U (object)"
+, "GOSSIPS or G, VOCABULARY or V"]
+const gossips = ["The  woodcutter lost  his home key...", "The butcher likes fruit... The cooper", "is greedy... Dratewka plans to make a", "poisoned  bait for the dragon...  The", 
+"tavern owner is buying food  from the", "pickers... Making a rag from a bag..."]
+//content 
 function handleInput(event) {
     let keyPressed = event.key;
     console.log(keyPressed);
@@ -91,6 +95,14 @@ function nextLocation(direction) {
         else {
             wrongCommand(badway)
         }
+    }
+    else if (direction === "V" || direction === "VOCABULARY")
+    {
+        showvocorgoss(vocalbulary); //fix css
+    }
+    else if (direction === "G" || direction === "GOSSIPS")
+    {
+        showvocorgoss(gossips); //fix css
     }
     else {
         wrongCommand(wrongcmd);

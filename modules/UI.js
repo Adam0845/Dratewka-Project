@@ -41,3 +41,23 @@ function goinsomewhere(direction)
     
     
 }
+
+function showvocorgoss(array) //fix css
+{
+    document.getElementById('gametext').style.display = 'none';
+    window.removeEventListener('keydown', handleInput);
+    document.getElementById('whatnow').innerHTML = "Press any key...";
+    for(let i = 0; i < array.length; ++i) {
+        let line = document.createElement('p');
+        line.innerHTML = array[i]
+        document.getElementById('newtext').append(line);
+    }
+    window.addEventListener('keydown',function(e) {
+        if(e.key) {
+            this.document.getElementById('newtext').innerHTML = '';
+            this.document.getElementById('gametext').style.display = 'inherit';
+            this.document.getElementById('whatnow').innerHTML = 'What now?'
+            this.window.addEventListener('keydown', handleInput)
+        }
+    })
+ }
