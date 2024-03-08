@@ -18,8 +18,14 @@ function updateUI(row, index) {
     directions = allLocations[row][index].getDirections();
     document.getElementById('directions').innerHTML += directions.join(", ");
     document.getElementById('text').innerHTML = allLocations[row][index].getText();
-    document.getElementById('nothatway').innerHTML = "";
+    document.getElementById('nothatway').innerHTML = "";  
+    document.getElementById("north").style.display = directions.includes("NORTH") ? "none" : "block";
+    document.getElementById("south").style.display = directions.includes("SOUTH") ? "none" : "block";
+    document.getElementById("west").style.display = directions.includes("WEST") ? "none" : "block";
+    document.getElementById("east").style.display = directions.includes("EAST") ? "none" : "block";
 }
+    
+
 
 function wrongCommand(message)
 {

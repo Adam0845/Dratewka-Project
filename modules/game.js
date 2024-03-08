@@ -20,7 +20,10 @@ function handleInput(event) {
         case "Backspace":
             inputElement.innerHTML = inputElement.innerHTML.slice(0, -1);
             break;
-            
+        case " ":
+            if(inputElement.innerHTML.length > 0)
+            { inputElement.innerHTML += " ";  }
+            break;
         default:
             if(keyPressed.toUpperCase() !== keyPressed.toLowerCase() && keyPressed.length === 1)
             {
@@ -69,8 +72,16 @@ function nextLocation(direction) {
             locx++;
             goinsomewhere("south")
             setTimeout(() => {
-            updateUI(locx, locy)
-            }, 1000);
+                console.log(allLocations[locx][locy].itemid)
+                if(allLocations[locx][locy].itemid!==undefined) {
+                    let item = finditem(allLocations[locx][locy].itemid)
+                    console.log(item)
+                    addItem(item.getfname())
+                    updateUI(locx, locy)
+                }
+                else {
+                updateUI(locx, locy) }
+                }, 1000);
         }
         else
         {
@@ -84,7 +95,15 @@ function nextLocation(direction) {
             locy--;
             goinsomewhere("west")
             setTimeout(() => {
-                updateUI(locx, locy)
+                console.log(allLocations[locx][locy].itemid)
+                if(allLocations[locx][locy].itemid!==undefined) {
+                    let item = finditem(allLocations[locx][locy].itemid)
+                    console.log(item)
+                    addItem(item.getfname())
+                    updateUI(locx, locy)
+                }
+                else {
+                updateUI(locx, locy) }
                 }, 1000);
         }
         else {
@@ -98,7 +117,14 @@ function nextLocation(direction) {
             locy++;
             goinsomewhere("east")
             setTimeout(() => {
-                updateUI(locx, locy)
+                console.log(allLocations[locx][locy].itemid)
+                if(allLocations[locx][locy].itemid!==undefined) {
+                    let item = finditem(allLocations[locx][locy].itemid)
+                    addItem(item.getfname())
+                    updateUI(locx, locy)
+                }
+                else {
+                updateUI(locx, locy) }
                 }, 1000);
         }
         else {
