@@ -49,4 +49,12 @@ const allItems = [
     new Item(36, "a PRIZE", true, "PRIZE"),
     new Item(37, "a SHEEP", true, "SHEEP")
 ]
+function finditem(index){
+    for(let i = 0; i < allItems.length; i++)
+    {
+      if(index = allItems[i].id) {
+        return allItems[i];
+      }  
+    }
+}
 //console.log(allItems)

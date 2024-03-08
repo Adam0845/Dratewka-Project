@@ -39,18 +39,27 @@ document.getElementById('locationimg').style.background = allLocations[locx][loc
 document.getElementById('text').innerHTML = allLocations[locx][locy].getText();
 document.getElementById('locationimg').src = `./gfx/${locx}${locy}.gif`;
 function nextLocation(direction) {
+   
     if (direction === "NORTH" || direction === "N") {
         let options = allLocations[locx][locy].getDirections();
         console.log(options)
         if (options.includes("NORTH")) {
             locx--;
             goinsomewhere("north")
+    
             setTimeout(() => {
-                updateUI(locx, locy)
+                console.log(allLocations[locx][locy].itemid)
+                if(allLocations[locx][locy].itemid!==undefined) {
+                    let item = finditem(allLocations[locx][locy].itemid)
+                    addItem(item.getfname())
+                    updateUI(locx, locy)
+                }
+                else {
+                updateUI(locx, locy) }
                 }, 1000);
         }
         else {
-            wrongCommand(wrongcmd)
+            wrongCommand(badway)
         }
     }
     else if (direction === "SOUTH" || direction === "S") {

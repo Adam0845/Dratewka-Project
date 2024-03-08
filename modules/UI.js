@@ -61,3 +61,7 @@ function showvocorgoss(array) //fix css
         }
     })
  }
+function addItem(fname)
+{
+    document.getElementById('whatusee').innerHTML = "You see " + fname;
+}
