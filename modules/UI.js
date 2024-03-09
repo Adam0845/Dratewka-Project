@@ -24,7 +24,7 @@ function updateUI(row, index) {
     document.getElementById("west").style.display = directions.includes("WEST") ? "none" : "block";
     document.getElementById("east").style.display = directions.includes("EAST") ? "none" : "block";
 }
-    
+ 
 
 
 function wrongCommand(message)

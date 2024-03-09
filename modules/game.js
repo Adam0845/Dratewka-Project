@@ -1,3 +1,4 @@
+
 let locx = 4;
 let locy = 7;
 console.log(allLocations[locx][locy].getColor())
@@ -7,7 +8,8 @@ const vocalbulary = ["NORTH or N, SOUTH or S","WEST or W, EAST or E", "TAKE (obj
 , "GOSSIPS or G, VOCABULARY or V"]
 const gossips = ["The  woodcutter lost  his home key...", "The butcher likes fruit... The cooper", "is greedy... Dratewka plans to make a", "poisoned  bait for the dragon...  The", 
 "tavern owner is buying food  from the", "pickers... Making a rag from a bag..."]
-//content 
+
+
 function handleInput(event) {
     let keyPressed = event.key;
     console.log(keyPressed);
@@ -35,12 +37,45 @@ function handleInput(event) {
             
     }
 }
+
+function czoloweczka() {
+    document.getElementById('source').src = './gfx/czolowka.jpg';
+    var audio = new Audio('./data/audio/intro.mp3');
+    audio.play();
+    let click_keydown = [];
+    
+    window.addEventListener('keydown', function(e) {
+        if(e) {
+            click_keydown.push(e.key);
+            console.log(click_keydown);
+            if(click_keydown.length === 1) {
+                document.getElementById('source').src = './gfx/opis_A.jpg';
+            }
+            if(click_keydown.length === 2) {
+                document.getElementById('source').src = './gfx/opis_B.jpg';
+            }
+            if(click_keydown.length > 2) {
+                audio.pause()
+                document.getElementById('czolowka').style.display = 'none';
+                document.getElementById('game').style.display = 'inherit';
+                window.removeEventListener('keydown', arguments.callee); 
+                document.getElementById('locationimg').style.background = allLocations[locx][locy].getColor();
+                document.getElementById('text').innerHTML = allLocations[locx][locy].getText();
+                document.getElementById('locationimg').src = `./gfx/${locx}${locy}.gif`;
+                window.addEventListener('keydown', handleInput);
+            }
+        }
+    });
+     window.removeEventListener('click', czoloweczka);
+     window.removeEventListener('keydown', czoloweczka)
+}
+document.getElementById('source').src = './gfx/czolowka.jpg';
+window.addEventListener('click', czoloweczka);
+window.addEventListener('keydown', czoloweczka);
 const badway = "You can't go that way...";
 const wrongcmd = "Try another command or use V...";
-window.addEventListener('keydown', handleInput);
-document.getElementById('locationimg').style.background = allLocations[locx][locy].getColor()
-document.getElementById('text').innerHTML = allLocations[locx][locy].getText();
-document.getElementById('locationimg').src = `./gfx/${locx}${locy}.gif`;
+
+
 function nextLocation(direction) {
    
     if (direction === "NORTH" || direction === "N") {
@@ -49,11 +84,11 @@ function nextLocation(direction) {
         if (options.includes("NORTH")) {
             locx--;
             goinsomewhere("north")
-    
             setTimeout(() => {
                 console.log(allLocations[locx][locy].itemid)
                 if(allLocations[locx][locy].itemid!==undefined) {
                     let item = finditem(allLocations[locx][locy].itemid)
+                    console.log(item)
                     addItem(item.getfname())
                     updateUI(locx, locy)
                 }
