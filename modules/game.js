@@ -9,8 +9,9 @@ const vocalbulary = ["NORTH or N, SOUTH or S","WEST or W, EAST or E", "TAKE (obj
 const gossips = ["The  woodcutter lost  his home key...", "The butcher likes fruit... The cooper", "is greedy... Dratewka plans to make a", "poisoned  bait for the dragon...  The", 
 "tavern owner is buying food  from the", "pickers... Making a rag from a bag..."]
 
-
+let lowercase = false;
 function handleInput(event) {
+    
     let keyPressed = event.key;
     console.log(keyPressed);
     switch(keyPressed) {
@@ -26,10 +27,22 @@ function handleInput(event) {
             if(inputElement.innerHTML.length > 0)
             { inputElement.innerHTML += " ";  }
             break;
+        case "CapsLock":
+        case "Shift":
+            lowercase = !lowercase;
+            break;
+        case "Tab": 
+            event.preventDefault();
+            break;  
         default:
             if(keyPressed.toUpperCase() !== keyPressed.toLowerCase() && keyPressed.length === 1)
             {
+                if(lowercase===true) {
+                    inputElement.innerHTML +=  keyPressed.toLowerCase();
+                }
+                else {
                 inputElement.innerHTML += keyPressed.toUpperCase();
+                }
             }
             else {
                 break;
@@ -105,7 +118,7 @@ function updateInventory() {
     }
 }
 function nextLocation(direction) {
-   
+    direction = direction.toUpperCase()
     if (direction === "NORTH" || direction === "N") {
         let options = allLocations[locx][locy].getDirections();
         console.log(options)
@@ -198,7 +211,32 @@ function nextLocation(direction) {
         }
     }
     else if(direction.startsWith("USE ") || direction.startsWith("U ")) {
-        console.log('dropik')
+        let loc = String(locx) + String(locy);
+        let parts = direction.split(" ")
+        let itemtouse = parts[1]
+        if(inventory[0] === undefined || itemtouse !== inventory[0].name) {
+            wrongCommand("Yoyu aren't caryying anything like that")
+        }
+        for(let i = 0; i < Crafts.length; ++i) {
+            if(inventory[0].id == Crafts[i].usedItem) {
+                console.log(inventory[0])
+                if(loc == Crafts[i].location)  {
+                    inventory.splice(0,1)
+                    wrongCommand(Crafts[i].message)
+                    let newitem = parseInt(Crafts[i].getItem)
+                    if(finditem(newitem).flag == 1) {
+                        inventory[0] = finditem(newitem);
+                    }
+                    if(finditem(newitem).flag == 0) {
+                        inventory[0] = undefined;
+                        allLocations[locx][locy].items.push(finditem(newitem).id);
+                    }
+                    updateInventory()
+                    updateItems()
+                    console.log(inventory[0])
+                }
+            }
+        }
     }
     else if(direction.startsWith("TAKE ") || direction.startsWith("T ")) {
         let parts = direction.split(" ")

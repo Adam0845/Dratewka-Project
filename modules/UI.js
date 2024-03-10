@@ -27,7 +27,7 @@ function updateUI(row, index) {
  
 
 
-function wrongCommand(message)
+function showmessage(message)
 {
 
     document.getElementById('whatnow').style.display = 'none';
