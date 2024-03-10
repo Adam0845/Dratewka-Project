@@ -35,6 +35,9 @@ function handleInput(event) {
             event.preventDefault();
             break;  
         default:
+            if(inputElement.innerHTML.length > 30) {
+                break;
+            } 
             if(keyPressed.toUpperCase() !== keyPressed.toLowerCase() && keyPressed.length === 1)
             {
                 if(lowercase===true) {
@@ -44,6 +47,7 @@ function handleInput(event) {
                 inputElement.innerHTML += keyPressed.toUpperCase();
                 }
             }
+            
             else {
                 break;
             }

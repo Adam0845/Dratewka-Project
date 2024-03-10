@@ -1,4 +1,5 @@
 function updateUI(row, index) {
+    document.getElementById('cursor').style.display = 'inherit';
     document.getElementById('whatnow').style.display = 'inherit';
     window.addEventListener('keydown', handleInput)
     document.getElementById('nothatway').innerHTML = "";
@@ -27,21 +28,24 @@ function updateUI(row, index) {
  
 
 
-function showmessage(message)
+function wrongCommand(message)
 {
 
     document.getElementById('whatnow').style.display = 'none';
+    document.getElementById('cursor').style.display = 'none';
     window.removeEventListener('keydown', handleInput)
     document.getElementById('nothatway').innerHTML = message;
     document.getElementById('ginput').innerHTML = "";
     setTimeout(() => {
         document.getElementById('whatnow').style.display = 'inherit';
+        document.getElementById('cursor').style.display = 'inherit';
         window.addEventListener('keydown', handleInput);
         document.getElementById('nothatway').innerHTML = "";
       }, "2000");
 }
 function goinsomewhere(direction)
 {
+    document.getElementById('cursor').style.display = 'none';
     document.getElementById('whatnow').style.display = 'none';
     window.removeEventListener('keydown', handleInput)
     document.getElementById('nothatway').innerHTML = "You are going " + direction + "..."

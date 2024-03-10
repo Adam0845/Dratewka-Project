@@ -20,12 +20,12 @@ const allLocations = [
     [],
     [
         new Location("You are inside a brimstone mine", "rgb(235,211,64)", ["EAST"], []),
-        new Location("You are at the entrance to the mine", "rgb(89,93,87)", ["EAST"],[]),
-        new Location("A hill", "rgb(117,237,243)", ["SOUTH", "EAST"], [31]),
-        new Location("Some bushes", "rgb(202,230,51)", ["EAST"], []),
-        new Location("An old deserted hut", "rgb(220,204,61)", ["EAST"], [27]),
-        new Location("The edge of a forest", "rgb(167,245,63)", ["EAST"], []),
-        new Location("A dark forest", "rgb(140,253,99)", ["SOUTH"], [14])
+        new Location("You are at the entrance to the mine", "rgb(89,93,87)", ["EAST", "WEST"],[]),
+        new Location("A hill", "rgb(117,237,243)", ["SOUTH", "EAST", "WEST"], [31]),
+        new Location("Some bushes", "rgb(202,230,51)", ["EAST", "WEST"], []),
+        new Location("An old deserted hut", "rgb(220,204,61)", ["EAST", "WEST"], [27]),
+        new Location("The edge of a forest", "rgb(167,245,63)", ["EAST", "WEST"], []),
+        new Location("A dark forest", "rgb(140,253,99)", ["SOUTH", "WEST"], [14])
     ],
     [
         new Location("A man nearby making tar", "rgb(255,190,99)",["SOUTH", "EAST"], []),

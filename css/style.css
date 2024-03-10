@@ -3,6 +3,11 @@
     src: url(../data/font/PressStart2P.ttf);
     
 }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 #czolowka {
   display: block;
   width: 30%;
@@ -11,27 +16,16 @@
 #game
 {
   display: none;
-  position: relative;
-    font-size: 23px;
-    width: 50%;
-    margin: 0 auto;
-    text-align: left;
-    padding: 10px;
-    font-family: dratewkafont;
-    background-color: black;
-    color: white;
-    border: 4px solid white;
-    overflow: auto;
-
-}
-#ginput
-{
-    background-color: black;
-    color: white;
-    font-family: dratewkafont;
-    border: 0px;
-    width: 150px;
-   
+  font-size: 23px;
+  width: 1000px;
+  height: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  font-family: dratewkafont;
+  background-color: black;
+  color: white;
+  overflow: hidden;
+  margin-top: 15px;
 }
 body
 {
@@ -41,17 +35,16 @@ body
 }
 #locationimg
 {
+  
     float: left;
-    margin: 10px;
-    margin-right: 50%;
     border: 4px solid white;
+    margin-right: 50px;
 
 }
-#directions {
-  margin-bottom: 10px;
-}
-#nothatway
+
+#nothatway, #directions
 {
+   
     margin-top: 10px;
 }
 #images {
@@ -69,11 +62,6 @@ body
     height: 120px;
     
    
-}
-#whatnow, #ginput {
-    display: inline-block;
-    margin-bottom: 10px;
-    margin-top: 10px;
 }
 #cmpmech {
     position: relative;
@@ -112,29 +100,19 @@ body
     right: -8%;
     transform: translateY(-50%) 
   }
-  /* #cursor {
-    height: 20px;
-    width: 15px;
-    background-color: gray;
-   
+#ginput, #whatnow, #dialogue {
     float: left;
-    
-} */
-#whatnow
-{
-  float: left;
-  
 }
 #ginput {
-    background-color: black;
-    color: white;
-    font-family: dratewkafont;
-    padding-right: 15px; 
-    margin-left: 10px;
-    float: left; 
-}
+  margin-left: 10px;
 
-#dialogue {
+}
+#cursor {
+  width: 15px;
+  height: 20px;
+  background-color: white;
   float: left;
-    clear: both; 
+}
+#newtext {
+  margin: 10px;
 }
