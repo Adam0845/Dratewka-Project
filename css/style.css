@@ -15,7 +15,8 @@
     font-size: 23px;
     width: 50%;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
+    padding: 10px;
     font-family: dratewkafont;
     background-color: black;
     color: white;
@@ -46,9 +47,12 @@ body
     border: 4px solid white;
 
 }
-#directions, #nothatway
+#directions {
+  margin-bottom: 10px;
+}
+#nothatway
 {
-    margin: 10px;
+    margin-top: 10px;
 }
 #images {
   display: flex;
@@ -106,5 +110,31 @@ body
   #east {
     top: 40%;
     right: -8%;
-    transform: translateY(-50%) };
+    transform: translateY(-50%) 
+  }
+  /* #cursor {
+    height: 20px;
+    width: 15px;
+    background-color: gray;
+   
+    float: left;
+    
+} */
+#whatnow
+{
+  float: left;
+  
+}
+#ginput {
+    background-color: black;
+    color: white;
+    font-family: dratewkafont;
+    padding-right: 15px; 
+    margin-left: 10px;
+    float: left; 
+}
 
+#dialogue {
+  float: left;
+    clear: both; 
+}

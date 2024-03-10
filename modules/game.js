@@ -61,6 +61,7 @@ function czoloweczka() {
                 window.removeEventListener('keydown', arguments.callee); 
                 document.getElementById('locationimg').style.background = allLocations[locx][locy].getColor();
                 document.getElementById('text').innerHTML = allLocations[locx][locy].getText();
+                document.getElementById('south').style.display = 'block';
                 document.getElementById('locationimg').src = `./gfx/${locx}${locy}.gif`;
                 window.addEventListener('keydown', handleInput);
             }
@@ -75,7 +76,34 @@ window.addEventListener('keydown', czoloweczka);
 const badway = "You can't go that way...";
 const wrongcmd = "Try another command or use V...";
 
+let inventory = [];
+function updateItems() {
+    let text = '';
+    console.log(allLocations[locx][locy].items)
+    for(let i = 0; i < allLocations[locx][locy].items.length; ++i) {
+        if(i == allLocations[locx][locy].items.length - 1) {
+            text += finditem(allLocations[locx][locy].items[i]).getfname() + '.';
+        }
+        else {
+        text += finditem(allLocations[locx][locy].items[i]).getfname() + ", ";
+        }
+    }
+    if(text!=="") {
+        document.getElementById('whatusee').innerHTML = "You see " + text;
+    }
+    else { 
+        document.getElementById('whatusee').innerHTML = "You see nothing.";
+    }
 
+}
+function updateInventory() {
+    if(inventory[0] === undefined) {
+        document.getElementById('whatucarry').innerHTML = "You are carrying nothing.";
+    }
+    else {
+        document.getElementById('whatucarry').innerHTML = "You are carrying  " + inventory[0].fname;
+    }
+}
 function nextLocation(direction) {
    
     if (direction === "NORTH" || direction === "N") {
@@ -85,15 +113,9 @@ function nextLocation(direction) {
             locx--;
             goinsomewhere("north")
             setTimeout(() => {
-                console.log(allLocations[locx][locy].itemid)
-                if(allLocations[locx][locy].itemid!==undefined) {
-                    let item = finditem(allLocations[locx][locy].itemid)
-                    console.log(item)
-                    addItem(item.getfname())
+                updateItems()
+                console.log(allLocations[locx][locy].items)
                     updateUI(locx, locy)
-                }
-                else {
-                updateUI(locx, locy) }
                 }, 1000);
         }
         else {
@@ -107,16 +129,10 @@ function nextLocation(direction) {
             locx++;
             goinsomewhere("south")
             setTimeout(() => {
-                console.log(allLocations[locx][locy].itemid)
-                if(allLocations[locx][locy].itemid!==undefined) {
-                    let item = finditem(allLocations[locx][locy].itemid)
-                    console.log(item)
-                    addItem(item.getfname())
-                    updateUI(locx, locy)
-                }
-                else {
+                updateItems()
+                console.log(allLocations[locx][locy].items)
                 updateUI(locx, locy) }
-                }, 1000);
+                , 1000);
         }
         else
         {
@@ -130,16 +146,10 @@ function nextLocation(direction) {
             locy--;
             goinsomewhere("west")
             setTimeout(() => {
-                console.log(allLocations[locx][locy].itemid)
-                if(allLocations[locx][locy].itemid!==undefined) {
-                    let item = finditem(allLocations[locx][locy].itemid)
-                    console.log(item)
-                    addItem(item.getfname())
-                    updateUI(locx, locy)
-                }
-                else {
+                updateItems()
+                console.log(allLocations[locx][locy].items)
                 updateUI(locx, locy) }
-                }, 1000);
+                , 1000);
         }
         else {
             wrongCommand(badway)
@@ -152,19 +162,70 @@ function nextLocation(direction) {
             locy++;
             goinsomewhere("east")
             setTimeout(() => {
-                console.log(allLocations[locx][locy].itemid)
-                if(allLocations[locx][locy].itemid!==undefined) {
-                    let item = finditem(allLocations[locx][locy].itemid)
-                    addItem(item.getfname())
-                    updateUI(locx, locy)
-                }
-                else {
-                updateUI(locx, locy) }
-                }, 1000);
+                updateItems()
+                updateUI(locx, locy)
+                    }
+                , 1000);
         }
         else {
             wrongCommand(badway)
         }
+    }
+    else if (direction === "DROP" || direction === "D" || direction === "TAKE" || direction === "T") {
+        wrongCommand('Specify item...!');
+    }
+    else if(direction.startsWith("DROP ") || direction.startsWith("D ")) {
+        let parts = direction.split(" ")
+        let itemtodrop = parts[1]
+        if(inventory[0] === undefined) {
+            wrongCommand("You are not carrying anything");
+        }
+        if(itemtodrop === inventory[0].name) {
+            if(allLocations[locx][locy].items.length >= 3) {
+                wrongCommand("You can't store any more here");
+            }
+            else { 
+                allLocations[locx][locy].items.push(inventory[0].id);
+                inventory[0] = undefined;
+                console.log(allLocations[locx][locy].items)
+                updateInventory()
+                updateItems()
+                wrongCommand("You are about to drop " + itemtodrop)
+            }
+        }
+        else {
+            wrongCommand("You are not carrying it");
+        }
+    }
+    else if(direction.startsWith("USE ") || direction.startsWith("U ")) {
+        console.log('dropik')
+    }
+    else if(direction.startsWith("TAKE ") || direction.startsWith("T ")) {
+        let parts = direction.split(" ")
+        let textitem = parts[1]
+        
+        if(inventory[0] !== undefined) {
+            wrongCommand("You are carrying something");
+        }
+        if(allLocations[locx][locy].items.length === 0) {
+            wrongCommand("There isn't anything like that here");
+        }
+        
+        for(let i = 0; i < allLocations[locx][locy].items.length; ++i) {
+           if(textitem === finditem(allLocations[locx][locy].items[i]).name) {
+               if(finditem(allLocations[locx][locy].items[i]).flag !== 0) {
+            console.log(finditem(allLocations[locx][locy].items[i]).name)
+                    
+                   inventory[0] = finditem(allLocations[locx][locy].items[i]);
+                   console.log(inventory)     
+                   wrongCommand('You are taking ' + inventory[0].fname)  
+                   allLocations[locx][locy].items.splice(i, 1);
+                   updateInventory()
+                   updateItems()     
+               }
+           }
+        }
+       
     }
     else if (direction === "V" || direction === "VOCABULARY")
     {

@@ -33,6 +33,7 @@ function wrongCommand(message)
     document.getElementById('whatnow').style.display = 'none';
     window.removeEventListener('keydown', handleInput)
     document.getElementById('nothatway').innerHTML = message;
+    document.getElementById('ginput').innerHTML = "";
     setTimeout(() => {
         document.getElementById('whatnow').style.display = 'inherit';
         window.addEventListener('keydown', handleInput);
@@ -69,5 +70,9 @@ function showvocorgoss(array) //fix css
  }
 function addItem(fname)
 {
-    document.getElementById('whatusee').innerHTML = "You see " + fname;
+    document.getElementById('whatusee').innerHTML = "You see " + fname + ". ";
+}
+function nothing()
+{
+    document.getElementById('whatusee').innerHTML = "You see nothing."
 }

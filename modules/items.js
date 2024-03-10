@@ -52,7 +52,7 @@ const allItems = [
 function finditem(index){
     for(let i = 0; i < allItems.length; i++)
     {
-      if(index = allItems[i].id) {
+      if(index === allItems[i].id) {
         return allItems[i];
       }  
     }
